@@ -36,10 +36,16 @@ def ReplaceTrueFalseAll(Data, nude_column):
 #Read latest dataframe
 path = "/Users/malika/Documents/Five Lives/Analysis/data/oxford 28102022/2022-10-28_questionaire.csv"
 Data = pd.read_csv(path)
+
+# Read excluded IDs file
+pathIDS = "/Users/malika/Documents/Five Lives/Analysis/data/excludedIDs_A0A2.csv"
+dfex = pd.read_csv(pathIDS)
 #Exclude wrong indexes and set index with user id
 Data = Data.set_index('participant_id')
-id_excluded = ['d7060e61-d14e-43c2-bb17-a0e12a8e7eec', '59e1cf98-84cd-432e-9fed-cb657bc12dcc', "affafce3-5437-4667-b54a-82a778c067e1","409cef7a-f4d3-4ad8-96dd-ee0697f54e58","1bf9c0ab-3e73-4dd7-bdb9-d1fe0b71c3d9","2f337f5e-0013-4e95-9ab8-18019bfaf431","62ab0646-c698-4c07-b026-06d3410fc8ad","d6d23cd8-d756-4236-8995-9d8602725c34","d2328069-30de-4206-a581-7ea1d31940ac","d7984580-7562-48f0-9886-d5980167b27d","7cd7ef4f-a89b-4c6c-a817-19dc5d9278ca","9e19eede-f10e-4b6b-8732-f3040363dcaf","89325e2d-37bb-4ce1-b373-7fee6b357b39","bae5d855-da2d-4b94-9d86-52470e24d0af","49819d1a-6d15-4975-bb2c-a50f732ac206","306d6062-14b5-4941-9b5c-3d86e05d9f10","e243a880-5ba8-4999-b169-4038cc600104","e1ec25c9-3e5a-4769-8ab3-9e1503a27bea","9815adbf-8e19-40a8-a4df-35e66b950eaa", "27f89ff5-0aff-4daf-bbd0-9c866911c84d"]
-
+id_excluded = []
+for i in dfex['Excluded ID']:
+    x = str(i)
+    id_excluded.append(x)
 
 ## Drop wrong user ID
 all_index = Data.index
