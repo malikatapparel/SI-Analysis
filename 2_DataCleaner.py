@@ -306,17 +306,17 @@ y =  A + 'glasses_water'
 df1[y] = np.nan
 for i in Sdf.index:
     if Sdf[y][i] == 'less_than_3':
-        df1.loc[i, y] = 0
-    elif Sdf[x][i] == '4to6':
         df1.loc[i, y] = 1
-    elif Sdf[y][i] == '7to9':
+    elif Sdf[x][i] == '4to6':
         df1.loc[i, y] = 2
-    elif Sdf[x][i] == '10to12':
+    elif Sdf[y][i] == '7to9':
         df1.loc[i, y] = 3
-    elif Sdf[x][i] == '13to15':
+    elif Sdf[x][i] == '10to12':
         df1.loc[i, y] = 4
-    elif Sdf[x][i] == 'more_than_16':
+    elif Sdf[x][i] == '13to15':
         df1.loc[i, y] = 5
+    elif Sdf[x][i] == 'more_than_16':
+        df1.loc[i, y] = 6
     elif np.isnan(Sdf[x][i]) == True:
         df1.loc[i, y] = np.nan
     else:
