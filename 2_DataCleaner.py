@@ -206,23 +206,39 @@ for i in df1.index:
 ### Smoke
 ## smoking score is smoking/increasing values: lowest score indicates a heavier smoker 
 #### smoking_amount replaced by  smoke_score 
-
-y = A +'smoke_score'
+x = A + 'smoking'
+y = A +'smoking_situation'
 df1[y] = np.nan
-x = A + 'smoking_amount'
 for i in Sdf.index:
-    if Sdf[x][i] == 'less_than_5':
+    if Sdf[x][i] == 'never':
+        df1.loc[i, y] = 0
+    elif Sdf[x][i] == 'past':
         df1.loc[i, y] = 1
-    elif Sdf[x][i] == '5_to_9':
+    elif Sdf[x][i] == 'current':
         df1.loc[i, y] = 2
-    elif Sdf[x][i] == '10_to_14':
-        df1.loc[i, y] = 3
-    elif Sdf[x][i] == '15_to_24':
-        df1.loc[i, y] = 4
-    elif Sdf[x][i] == '25_or_more':
-        df1.loc[i, y] = 5
     elif np.isnan(Sdf[x][i]) == True:
         df1.loc[i, y] = np.nan
+    else:
+        raise ValueError('Value could not be attributed, as it is not in the list')
+
+
+x = A +'smoking_amount'
+df1[x] = np.nan
+for i in Sdf.index:
+    if Sdf[x][i] == 'less_than_5':
+        df1.loc[i, x] = 1
+    elif Sdf[x][i] == '5_to_9':
+        df1.loc[i, x] = 2
+    elif Sdf[x][i] == '10_to_14':
+        df1.loc[i, x] = 3
+    elif Sdf[x][i] == '15_to_24':
+        df1.loc[i, x] = 4
+    elif Sdf[x][i] == '25_or_more':
+        df1.loc[i, x] = 5
+    elif df1[A +'smoking_situation'][i] == '0':
+        df1.loc[i, x] = 0
+    elif np.isnan(Sdf[x][i]) == True:
+        df1.loc[i, x] = np.nan
     else:
         raise ValueError('Value could not be attributed, as it is not in the list')
         
